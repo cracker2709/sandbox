@@ -124,6 +124,7 @@
    </dependencies>
     <modules>
         <module>utils</module>
+        <module>spring-boot-sample</module>
     </modules>
 
 
