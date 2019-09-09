@@ -19,6 +19,9 @@ import java.security.cert.X509Certificate;
 import java.util.Enumeration;
 
 @Slf4j
+/**
+ * Init of SSL Contexts with keystores and truststores
+ */
 public class SSLContextUtils {
 
 

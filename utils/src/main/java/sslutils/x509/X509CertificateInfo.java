@@ -1,7 +1,3 @@
-/*
- * (c) Copyright 1998-2014, ASIP. All rights reserved.
- */
-
 package sslutils.x509;
 
 import lombok.Data;
@@ -20,7 +16,7 @@ import java.util.Date;
 
 
 /**
- * Classe d'extraction des données du certificat
+ * X509 Certificate data extraction helper
  * 
  */
 
@@ -50,7 +46,7 @@ public class X509CertificateInfo {
 	private String orderedSubjectDN;
 
 	/**
-	 * Constructeur de la classe X509CertificateInfo
+	 * X509CertificateInfo builder
 	 * 
 	 * @param x509Certificate
 	 */
@@ -65,11 +61,10 @@ public class X509CertificateInfo {
 
 
 	/**
-	 * Extrait les valeurs du certificat X509 pour initialiser l'objet
-	 * X509CertificateInfo
+	 * Extracts {@link X509Certificate} data to build  {@link X509CertificateInfo}
 	 * 
 	 * @param certificate
-	 *            le certificat depuis lequel on extrait les données
+	 *            input {@link X509Certificate}
 	 */
 
 	public void init(X509Certificate certificate) throws CertificateEncodingException {
@@ -103,14 +98,13 @@ public class X509CertificateInfo {
 	}
 
 	/**
-	 * Récupère une valeur dans une string en fonction d'un tag indiqué dans la
-	 * string search
+	 * Get identifier in {@link X509Certificate}
 	 * 
 	 * @param x500Name
-	 *            L'element du certificat a parser
+	 *            {@link X500Name} part of certificate
 	 * @param search
-	 *            l'attribut a extraire
-	 * @return les données extraites
+	 *            attribute to extract
+	 * @return data of {@link X509Certificate} attribute
 	 */
 
 	private String parseInfo(X500Name x500Name, ASN1ObjectIdentifier search) {

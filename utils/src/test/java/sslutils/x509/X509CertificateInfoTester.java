@@ -10,7 +10,7 @@ import java.security.cert.X509Certificate;
 
 
 /**
- * Classe d'extraction des données du certificat
+ * Junit Tests of {@link X509CertificateInfo}
  *
  */
 

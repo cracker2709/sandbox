@@ -1,7 +1,3 @@
-/*
- * (c) Copyright 1998-2014, ASIP. All rights reserved.
- */
-
 package sslutils.x509;
 
 import lombok.Data;

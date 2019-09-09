@@ -1,8 +1,5 @@
 package regex;
 
-import org.apache.commons.lang.StringUtils;
-
-import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
