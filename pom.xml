@@ -6,22 +6,83 @@
 
     <groupId>foo</groupId>
     <artifactId>bar</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
-    <dependencies>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.0.M5</version>
+        <relativePath /> <!-- lookup parent from repository -->
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <!-- Versions à vérifier (réaliser les montées de versions si version plus
+            récente disponible - search.maven.org). Ne conserver ici les versions que
+            si elles doivent être synchronisées entre plusieurs dépendances. Exemple:
+            spring-* -->
+        <!-- Pour les autres, placer la version directement dans la dépendence
+            : plus lisible et gestion automatique par Maven -->
+        <unitils.version>3.3</unitils.version>
+        <!-- <cxf.version>2.4.2</cxf.version> -->
+        <cxf.version>3.2.1</cxf.version>
+        <cxf.codegen.plugin.version>3.2.1</cxf.codegen.plugin.version>
+        <statelessfilter.version>0.4</statelessfilter.version>
+        <spring-modules-jakarta-commons.version>0.8</spring-modules-jakarta-commons.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.checkstyle.version>2.7</maven.checkstyle.version>
+        <maven.pmd.version>2.5</maven.pmd.version>
+        <maven.findbugs.version>2.3.2</maven.findbugs.version>
+        <jaxws.api.version>2.2.11</jaxws.api.version>
+        <maven.release.version>2.2.1</maven.release.version>
+        <slf4j.version>1.7.7</slf4j.version>
+        <yuicompressor.version>1.2</yuicompressor.version>
+        <maven.replacer.version>1.4.0</maven.replacer.version>
+        <maven.resources.version>2.5</maven.resources.version>
+        <maven.antrun.version>1.7</maven.antrun.version>
+        <cobertura-maven.version>2.5.1</cobertura-maven.version>
+        <maven.compiler.version>2.3.2</maven.compiler.version>
+        <maven.surefire.version>2.11</maven.surefire.version>
+        <maven.jar.version>2.3.1</maven.jar.version>
+        <maven.war.version>2.1.1</maven.war.version>
+        <properties.maven.version>1.0-alpha-2</properties.maven.version>
+    </properties>
+
+   <dependencies>
         <dependency>
-            <groupId>fr.opensagres.xdocreport</groupId>
-            <artifactId>fr.opensagres.xdocreport.core</artifactId>
-            <version>1.0.4</version>
+            <groupId>org.springframework.security.extensions</groupId>
+            <artifactId>spring-security-saml2-core</artifactId>
+            <version>1.0.3.RELEASE</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>fr.opensagres.xdocreport</groupId>
-            <artifactId>fr.opensagres.xdocreport.template</artifactId>
-            <version>1.0.4</version>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
         </dependency>
         <dependency>
-            <groupId>fr.opensagres.xdocreport</groupId>
-            <artifactId>fr.opensagres.xdocreport.document</artifactId>
-            <version>1.0.4</version>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+            <version>${lombok.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.7.0</version>
         </dependency>
         <dependency>
             <groupId>commons-lang</groupId>
@@ -29,26 +90,42 @@
             <version>2.4</version>
         </dependency>
         <dependency>
-            <groupId>fr.opensagres.xdocreport</groupId>
-            <artifactId>fr.opensagres.xdocreport.document.docx</artifactId>
-            <version>1.0.4</version>
-        </dependency>
-        <dependency>
-            <groupId>fr.opensagres.xdocreport</groupId>
-            <artifactId>fr.opensagres.xdocreport.template.velocity</artifactId>
-            <version>1.0.4</version>
-        </dependency>
-        <dependency>
-            <groupId>fr.opensagres.xdocreport</groupId>
-            <artifactId>fr.opensagres.xdocreport.converter.docx.xwpf</artifactId>
-            <version>1.0.4</version>
-        </dependency>
-        <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20160810</version>
         </dependency>
-    </dependencies>
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>c3p0</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>0.9.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>1.9.5</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.9</version>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${h2.version}</version>
+            <scope>test</scope>
+        </dependency>
+   </dependencies>
+    <modules>
+        <module>utils</module>
+    </modules>
+
 
 
 </project>

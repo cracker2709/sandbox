@@ -1,4 +1,5 @@
-import org.apache.commons.lang.StringUtils;
+package json;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
