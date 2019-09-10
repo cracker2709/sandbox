@@ -28,7 +28,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.util.ClassUtils;
 
 @Configuration
-@EnableJpaRepositories(basePackages = {"sample.repository" }, entityManagerFactoryRef = "bddSampleEntityManager",transactionManagerRef="bddSampleTransactionManager")
+@EnableJpaRepositories(basePackages = {"sample.repository" }, entityManagerFactoryRef = "dataSourcebddSample",transactionManagerRef="bddSampleTransactionManager")
 @AutoConfigureOrder
 public class BddSampleDatabaseConfig {
 

@@ -27,8 +27,8 @@ public class H2Config {
 	@Autowired
 	private Environment env;
 
-	@Bean("dataSourceMssPil")
-	public DataSource dataSourceMssPil() {
+	@Bean("dataSourcebddSample")
+	public DataSource dataSourcebddSample() {
 		final DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName(env.getProperty("spring.datasource.driver-class-name"));
 		dataSource.setUrl(env.getProperty("spring.datasource.url"));
@@ -38,11 +38,11 @@ public class H2Config {
 		return dataSource;
 	}
 
-	@Bean(name = "mssPilEntityManager")
-	@PersistenceContext(unitName = "persistenceUnitMssPil")
+	@Bean(name = "bddSampleEntityManager")
+	@PersistenceContext(unitName = "persistenceUnitSample")
 	public LocalContainerEntityManagerFactoryBean mssPilEntityManager() {
 		final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-		em.setDataSource(dataSourceMssPil());
+		em.setDataSource(dataSourcebddSample());
 		em.setPersistenceUnitName("persistenceUnitSampleTest");
 		em.setPackagesToScan(new String[] { "sample.domain" });
 		em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
@@ -50,8 +50,8 @@ public class H2Config {
 		return em;
 	}
 
-	@Bean("sampleTransactionManager")
-	JpaTransactionManager mssPilTransactionManager(final EntityManagerFactory entityManagerFactory) {
+	@Bean("bddSampleTransactionManager")
+	JpaTransactionManager bddSampleTransactionManager(final EntityManagerFactory entityManagerFactory) {
 		final JpaTransactionManager transactionManager = new JpaTransactionManager();
 		transactionManager.setEntityManagerFactory(entityManagerFactory);
 		return transactionManager;
