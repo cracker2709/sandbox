@@ -15,7 +15,7 @@ import java.security.cert.X509Certificate;
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-public class X509CertificateInfoTester {
+public class X509CertificateInfoTest {
 
     private static String VALID_CERT = "github.crt";
     private static String VALID_CERT2 = "dockerhub.crt";

@@ -7,7 +7,7 @@ import java.util.GregorianCalendar;
 public class CalendarMonthCalc {
     public static void main(String[] args) {
         // Using Calendar - calculating number of months between two dates
-        Calendar report = new GregorianCalendar(2019, Calendar.AUGUST, 19);
+        Calendar report = new GregorianCalendar(2019, Calendar.MAY, 31);
         Calendar today = new GregorianCalendar();
         today.setTime(new Date());
 
