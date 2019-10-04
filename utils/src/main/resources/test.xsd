@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://jaxb" elementFormDefault="qualified"
+           targetNamespace="http://jaxb" >
+
+    <xs:element name="GlobalList" type="GlobalList" />
+    <xs:element name="List" type="List" />
+    <xs:element name="Elem" type="Elem" />
+
+
+    <xs:complexType name="GlobalList">
+        <xs:sequence>
+            <xs:element name="generatedDate" type="xs:string" />
+            <xs:element ref="List" />
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:complexType name="List">
+        <xs:sequence>
+            <xs:element ref="Elem" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Elem">
+        <xs:sequence>
+            <xs:element name="Nom" type="xs:string" />
+            <xs:element name="Desc" type="xs:string" />
+            <xs:element name="DN" type="xs:string" />
+            <xs:element name="Resp1" type="xs:int" />
+            <xs:element name="Resp2" type="xs:string" />
+            <xs:element name="DateMAJ" type="xs:string" />
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

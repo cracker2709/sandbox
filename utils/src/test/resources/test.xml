@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><GlobalList  xmlns="http://jaxb" targetNamespace="http://jaxb" versionFormat="1.0.0">
+    <generatedDate>2019-09-19T17:38:45Z</generatedDate>
+    <List>
+        <Elem>
+            <Nom>metier1</Nom>
+            <Desc>Desc metier</Desc>
+            <DN>CN=test,OU=1234,O=GAP,ST=Nord (59),C=FR</DN>
+            <Resp1>nom prenom</Resp1>
+            <Resp2>nom prenom</Resp2>
+            <DateMAJ>2019-09-19T17:38:45Z</DateMAJ>
+        </Elem>
+        <Elem>
+            <Nom>metier2</Nom>
+            <Desc>Desc metier</Desc>
+            <DN>CN=test,OU=1234,O=GAP,ST=Nord (59),C=FR</DN>
+            <Resp1>nom prenom</Resp1>
+            <Resp2>nom prenom</Resp2>
+            <DateMAJ>2019-09-19T17:38:45Z</DateMAJ>
+        </Elem>
+        <Elem>
+            <Nom>metier</Nom>
+            <Desc>Desc metier</Desc>
+            <DN>CN=test,OU=1234,O=GAP,ST=Nord (59),C=FR</DN>
+            <Resp1>nom prenom</Resp1>
+            <Resp2>nom prenom</Resp2>
+            <DateMAJ>2019-09-19T17:38:45Z</DateMAJ>
+        </Elem>
+        <Elem>
+            <Nom>metier</Nom>
+            <Desc>Desc metier</Desc>
+            <DN>CN=test2,OU=56789,O=GAP,ST=Pas De Calais (62), C=FR</DN>
+            <Resp1>Mnom2 prenom2</Resp1>
+            <Resp2>Mnom2 prenom2</Resp2>
+            <DateMAJ>2019-09-19T17:38:45Z</DateMAJ>
+        </Elem>
+        <Elem>
+            <Nom>metier</Nom>
+            <Desc>Desc metier</Desc>
+            <DN>CN=test2,OU=56789,O=GAP,ST=Pas De Calais (62), C=FR</DN>
+            <Resp1>Mnom2 prenom2</Resp1>
+            <Resp2>Mnom2 prenom2</Resp2>
+            <DateMAJ>2019-09-19T17:38:45Z</DateMAJ>
+        </Elem>
+        <Elem>
+            <Nom>metier</Nom>
+            <Desc>Desc metier</Desc>
+            <DN>CN=test2,OU=56789,O=GAP,ST=Pas De Calais (62), C=FR</DN>
+            <Resp1>Mnom2 prenom2</Resp1>
+            <Resp2>Mnom2 prenom2</Resp2>
+            <DateMAJ>2019-09-19T17:38:45Z</DateMAJ>
+        </Elem>
+        <Elem>
+            <Nom>metier</Nom>
+            <Desc>Desc metier</Desc>
+            <DN>CN=test2,OU=56789,O=GAP,ST=Pas De Calais (62), C=FR</DN>
+            <Resp1>Mnom2 prenom2</Resp1>
+            <Resp2>Mnom2 prenom2</Resp2>
+            <DateMAJ>2019-09-19T17:38:45Z</DateMAJ>
+        </Elem>
+    </List>
+</GlobalList>
