@@ -11,6 +11,9 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+import reactor.test.StepVerifier;
 import sample.domain.MyTableEntity;
 
 
@@ -40,10 +43,16 @@ public class MyTableRepositoryTest {
         Date dateMax = Date.from(LocalDateTime.parse("2018-07-28 02:59:59" , DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss",Locale.FRANCE)).toInstant(ZoneOffset.UTC));
 
         // WHEN
-        List<MyTableEntity> actionEntities = myTableRepository.findByCreationDateBetween(dateMin, dateMax);
+        Flux<MyTableEntity> tableEntityFlux = myTableRepository.findByCreationDateBetween(dateMin, dateMax);
 
         // THEN
-        Assert.assertFalse("Liste Non Vide  =  OK  " , actionEntities.isEmpty());
+        StepVerifier
+                .create(tableEntityFlux)
+                .expectNextMatches(name -> name.equals("OP01"))
+                .expectComplete()
+
+                .verify();
+
     }
 
     @Test
@@ -57,22 +66,11 @@ public class MyTableRepositoryTest {
         myTableEntity.setCreationDate(new Date());
 
         // WHEN
-        myTableRepository.save(myTableEntity);
+        Mono<MyTableEntity> myTableEntityMono = myTableRepository.save(myTableEntity);
 
         // THEN
-        try {
-            Optional<MyTableEntity> opt = myTableRepository.findById(9L);
-            Assert.assertTrue(opt.isPresent());
-            MyTableEntity written = opt.get();
-            Assert.assertNotNull(written);
-            Assert.assertEquals("test", written.getName());
-            Assert.assertEquals("address", written.getAddress());
-            Assert.assertEquals("email", written.getEmail());
-            Assert.assertNotNull(written.getCreationDate());
+        StepVerifier.create(myTableEntityMono).expectNextMatches(name -> name.equals("test"));
 
-        }catch (Exception e) {
-            Assert.fail(e.getMessage());
-        }
     }
 
 }

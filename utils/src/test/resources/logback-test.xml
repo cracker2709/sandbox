@@ -9,13 +9,6 @@
 		</layout>
 	</appender>
 
-	<appender name="TRACE" class="ch.qos.logback.core.FileAppender">
-		<file>traces-sipil-${byMonth}.log</file>
-		<encoder>
-			<pattern>%msg%n</pattern>
-		</encoder>
-	</appender>
-
 
 	<logger name="org.springframework" level="ERROR" additivity="false">
 		<appender-ref ref="STDOUT" />

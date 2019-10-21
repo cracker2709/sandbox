@@ -4,14 +4,16 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.reactive.ReactiveSortingRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import reactor.core.publisher.Flux;
 import sample.domain.MyTableEntity;
 
 
 @Transactional
 @Repository("MyTableRepository")
-public interface MyTableRepository extends CrudRepository<MyTableEntity, Long> {
+public interface MyTableRepository extends ReactiveSortingRepository<MyTableEntity, Long> {
 
     /**
      *
@@ -19,6 +21,6 @@ public interface MyTableRepository extends CrudRepository<MyTableEntity, Long> {
      * @param dateMax
      * @return
      */
-    List<MyTableEntity> findByCreationDateBetween(Date dateMin, Date dateMax);
+    Flux<MyTableEntity> findByCreationDateBetween(Date dateMin, Date dateMax);
 
 }

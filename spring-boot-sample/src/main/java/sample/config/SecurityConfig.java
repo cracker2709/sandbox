@@ -42,7 +42,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic().disable()
                 .authorizeRequests()
                 /*.antMatchers("/").permitAll()
-                .antMatchers("/sipil/").permitAll()
                 .antMatchers("/error").permitAll()*/
                 .anyRequest().permitAll();
 

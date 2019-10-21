@@ -1,10 +1,4 @@
 package sample.config;
-import java.util.Arrays;
-import java.util.Properties;
-
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceContext;
-import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,7 +10,6 @@ import org.springframework.boot.autoconfigure.condition.SpringBootCondition;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ConditionContext;
-import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.core.type.AnnotatedTypeMetadata;
@@ -26,6 +19,12 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.util.ClassUtils;
+
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
+import javax.sql.DataSource;
+import java.util.Arrays;
+import java.util.Properties;
 
 @Configuration
 @EnableJpaRepositories(basePackages = {"sample.repository" }, entityManagerFactoryRef = "dataSourcebddSample",transactionManagerRef="bddSampleTransactionManager")

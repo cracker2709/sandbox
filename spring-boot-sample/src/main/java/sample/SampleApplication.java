@@ -4,13 +4,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.support.ErrorPageFilter;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.reactive.config.EnableWebFlux;
 
-import javax.swing.*;
 
 @SpringBootApplication
+@EnableWebFlux
 @ComponentScan(basePackages = { "sample", "sample.services", "sample.manager.services", "sample.security.service","sample.web", "sample.exception.advice", "sample.services.filters"})
 public class SampleApplication {
 

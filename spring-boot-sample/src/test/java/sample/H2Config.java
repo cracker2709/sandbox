@@ -21,7 +21,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableJpaRepositories(basePackages = {"sample.repository" },
 						entityManagerFactoryRef = "bddSampleEntityManager",
 						transactionManagerRef = "bddSampleTransactionManager")
-@EnableTransactionManagement
 public class H2Config {
 
 	@Autowired

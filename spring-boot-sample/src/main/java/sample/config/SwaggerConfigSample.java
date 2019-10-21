@@ -16,7 +16,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 @ComponentScan(basePackages = {"sample.web"})
-public class SwaggerConfigMssPil {
+public class SwaggerConfigSample {
 
 	@Bean
 	public Docket api() {
