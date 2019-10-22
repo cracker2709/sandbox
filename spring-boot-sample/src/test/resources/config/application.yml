@@ -2,3 +2,5 @@ spring:
   profiles:
     active: test
     include: swagger
+  main:
+    allow-bean-definition-overriding: true

@@ -14,8 +14,8 @@
 
 
         <spring-boot.version>2.1.4.RELEASE</spring-boot.version>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven-installer-plugin.version>2.5.2</maven-installer-plugin.version>
+        <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
         <os-maven.plugin.version>1.5.0.Final</os-maven.plugin.version>
         <lombok.version>1.18.2</lombok.version>
         <guava.version>27.0-jre</guava.version>
@@ -31,7 +31,7 @@
         <reactor-extra.version>3.3.0.RELEASE</reactor-extra.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>11</java.version>
+        <java.version>1.8</java.version>
         <log4j.version>1.3.8.RELEASE</log4j.version>
         <maven.javadoc.failOnError>false</maven.javadoc.failOnError>
         <mysql.version>5.1.48</mysql.version>
@@ -40,19 +40,46 @@
     </properties>
 
     <dependencies>
-
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <version>${spring-boot.version}</version>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-core</artifactId>
+            <version>3.2.3.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-test</artifactId>
+            <version>3.2.3.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+            <version>${spring-boot.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <version>${spring-boot.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.vaadin.external.google</groupId>
+                    <artifactId>android-json</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -70,21 +97,6 @@
             <version>2.4</version>
         </dependency>
         <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20160810</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
-            <version>2.3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>c3p0</groupId>
-            <artifactId>c3p0</artifactId>
-            <version>0.9.1.2</version>
-        </dependency>
-        <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <version>1.9.5</version>
@@ -96,12 +108,6 @@
             <version>1.7.9</version>
         </dependency>
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>${h2.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>${guava.version}</version>
@@ -109,9 +115,30 @@
         </dependency>
     </dependencies>
     <modules>
+        <module>docker</module>
         <module>utils</module>
         <module>spring-boot-sample</module>
     </modules>
+    <build>
+        <plugins>
+            <!-- Maven compiler -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <!--<forceJavacCompilerUse>true</forceJavacCompilerUse>-->
+                    <compilerArgs>
+                        <arg>-Werror</arg>
+                        <arg>-verbose</arg>
+                    </compilerArgs>
+                </configuration>
+
+            </plugin>
+        </plugins>
+    </build>
 
 
 </project>

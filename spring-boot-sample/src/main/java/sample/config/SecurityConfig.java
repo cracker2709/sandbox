@@ -1,52 +1,42 @@
 package sample.config;
+
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.annotation.web.configurers.X509Configurer;
+import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
+import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
+import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.web.server.SecurityWebFilterChain;
+
+import static org.springframework.security.web.server.util.matcher.ServerWebExchangeMatchers.pathMatchers;
 
 @Configuration
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true)
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+@EnableWebFluxSecurity
+@EnableReactiveMethodSecurity
+@Setter(onMethod = @__({@Autowired}))
+@Slf4j
+public class SecurityConfig {
 
-    /**
-     *
-     */
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring()
-                .antMatchers("/resources/**")
-                .antMatchers(HttpMethod.OPTIONS, "/**")
-                .antMatchers("/content/**")
-                .antMatchers("/swagger-ui/index.html")
-                .antMatchers("/test/**")
-                .antMatchers("/h2-console/**");
+    private static final String ADMIN_PATH = "/**/admin/**";
+    private static final String ALL_PATHS = "/**/**";
+
+
+
+    @Bean
+    public SecurityWebFilterChain springSecurityFilterChain(final ServerHttpSecurity http) {
+
+        http
+                .csrf().disable()
+                .authorizeExchange()
+                .matchers(pathMatchers(HttpMethod.OPTIONS, ADMIN_PATH)).permitAll()
+                .pathMatchers(ADMIN_PATH).authenticated()
+                .anyExchange().permitAll();
+
+        return http.build();
     }
 
-
-    /**
-     * Config des urls protégées et publics
-     */
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        X509Configurer x509Configurer = new X509Configurer();
-        x509Configurer.init(http);
-
-        http.csrf()
-                .disable()
-                .formLogin().disable()
-                .httpBasic().disable()
-                .authorizeRequests()
-                /*.antMatchers("/").permitAll()
-                .antMatchers("/error").permitAll()*/
-                .anyRequest().permitAll();
-
-        http.logout()
-                .logoutSuccessUrl("/");
-    }
 
 }

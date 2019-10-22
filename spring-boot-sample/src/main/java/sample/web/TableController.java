@@ -16,10 +16,11 @@ import javax.naming.Context;
 
 @Slf4j
 @RestController
-@RequestMapping("/secured")
-public class WebController {
+@RequestMapping("/table")
+public class TableController {
 
     private DataService dataService;
+    private TableHolder tableHolder;
 
     @GetMapping(value = "/all")
     @ResponseStatus(HttpStatus.OK)
@@ -27,8 +28,8 @@ public class WebController {
 
         log.info("Retrieve all models " + ReflectionToStringBuilder.toString(context));
 
-        return this.cartHolder.getCurrentCart(context)
-                .flatMap(cart -> this.cartService.getCustomerCart(context, cart));
+        return this.tableHolder.getAllTable(context)
+                .flatMap(table -> this.dataService.findAll());
     }
 
 
