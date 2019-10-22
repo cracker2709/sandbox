@@ -23,11 +23,8 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
-
+docker/data/mongo
 ### releases ###
 pom.xml.releaseBackup
 release.properties
 syntax: glob
-
-/bi-ws/src/main/resources/config
-/bi-ws/src/main/resources/logback.xml
