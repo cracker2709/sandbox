@@ -1,6 +1,7 @@
 package sample.repository;
 
 
+import date.DateFormatUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,14 +31,14 @@ public class MyTableRepositoryTest {
 
 
     private static final int NBDOC = 8;
-    private static final Long ID_1 = 1L;
-    private static final Long ID_2 = 2L;
-    private static final Long ID_3 = 3L;
-    private static final Long ID_4 = 4L;
-    private static final Long ID_5 = 5L;
-    private static final Long ID_6 = 6L;
-    private static final Long ID_7 = 7L;
-    private static final Long ID_8 = 8L;
+    private static final String CODE_1 = "1";
+    private static final String CODE_2 = "2";
+    private static final String CODE_3 = "3";
+    private static final String CODE_4 = "4";
+    private static final String CODE_5 = "5";
+    private static final String CODE_6 = "6";
+    private static final String CODE_7 = "7";
+    private static final String CODE_8 = "8";
     private static final String OP04 = "OP04";
     private static final String TOURNAI = "TOURNAI";
 
@@ -71,13 +72,16 @@ public class MyTableRepositoryTest {
         c.set(Calendar.MINUTE, 59);
         c.set(Calendar.SECOND, 59);
 
+        String dateString = DateFormatUtils.formatSqlDateToString(c.getTime());
+
+
         // WHEN
-        final Mono<MyTableModel> myTableModelMono = myTableRepository.findById(8L);
+        final Mono<MyTableModel> myTableModelMono = myTableRepository.findById(CODE_8);
 
         // THEN
         StepVerifier.create(myTableModelMono)
                 .expectSubscription()
-                .consumeNextWith(p -> verifyAsserts(p, ID_8, OP04, c.getTime(), TOURNAI))
+                .consumeNextWith(p -> verifyAsserts(p, CODE_8, OP04, dateString, TOURNAI))
                 .verifyComplete();
 
     }
@@ -127,9 +131,9 @@ public class MyTableRepositoryTest {
      * @param creationDate
      * @param address
      */
-    private void verifyAsserts(MyTableModel myTableModel, Long id, String name, Date creationDate, String address) {
+    private void verifyAsserts(MyTableModel myTableModel, String id, String name, String creationDate, String address) {
         Assert.assertNotNull(myTableModel);
-        Assert.assertEquals(id, myTableModel.getId());
+        Assert.assertEquals(id, myTableModel.getCode());
         Assert.assertEquals(name, myTableModel.getName());
         Assert.assertEquals(creationDate, myTableModel.getCreationDate());
         Assert.assertEquals(address, myTableModel.getAddress());
