@@ -7,7 +7,7 @@ import sample.repository.MyTableRepository;
 import sample.repository.models.MyTableModel;
 
 @Service
-public class DataService {
+public class MyTableService {
 
     @Autowired
     private MyTableRepository myTableRepository;

@@ -1,10 +1,8 @@
 package sample.repository.models;
 
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -20,7 +18,6 @@ import java.util.Date;
 @Document(value = "myTable")
 public class MyTableModel {
     @Id
-    @Indexed
     @Setter(AccessLevel.PRIVATE)
     private Long id;
 

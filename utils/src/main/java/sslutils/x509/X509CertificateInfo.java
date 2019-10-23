@@ -1,7 +1,7 @@
 package sslutils.x509;
 
 import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 import org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import org.bouncycastle.asn1.x500.RDN;
@@ -21,7 +21,7 @@ import java.util.Date;
  */
 
 
-@Slf4j
+@Log4j2
 @Data
 public class X509CertificateInfo {
 	private X509Certificate x509Certificate;

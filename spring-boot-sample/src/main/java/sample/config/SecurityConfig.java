@@ -1,7 +1,7 @@
 package sample.config;
 
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +17,7 @@ import static org.springframework.security.web.server.util.matcher.ServerWebExch
 @EnableWebFluxSecurity
 @EnableReactiveMethodSecurity
 @Setter(onMethod = @__({@Autowired}))
-@Slf4j
+@Log4j2
 public class SecurityConfig {
 
     private static final String ADMIN_PATH = "/**/admin/**";
