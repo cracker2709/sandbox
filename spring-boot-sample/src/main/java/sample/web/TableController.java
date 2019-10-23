@@ -2,16 +2,15 @@ package sample.web;
 
 
 import lombok.extern.slf4j.Slf4j;
-
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 import sample.repository.models.MyTableModel;
 import sample.services.DataService;
-
-import javax.naming.Context;
 
 
 @Slf4j
@@ -19,17 +18,16 @@ import javax.naming.Context;
 @RequestMapping("/table")
 public class TableController {
 
+    @Autowired
     private DataService dataService;
-    private TableHolder tableHolder;
 
     @GetMapping(value = "/all")
     @ResponseStatus(HttpStatus.OK)
-    public Flux<MyTableModel> getAllModels(final Context context) {
+    public Flux<MyTableModel> getAllModels() {
 
-        log.info("Retrieve all models " + ReflectionToStringBuilder.toString(context));
+        log.info("Retrieve all models");
 
-        return this.tableHolder.getAllTable(context)
-                .flatMap(table -> this.dataService.findAll());
+        return this.dataService.findAll().flatMap(Flux::just);
     }
 
 

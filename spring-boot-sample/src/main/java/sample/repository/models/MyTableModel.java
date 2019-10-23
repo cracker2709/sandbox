@@ -10,16 +10,18 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
+
 @Builder
 @Getter
 @Setter
-@EqualsAndHashCode
 @ToString
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@AllArgsConstructor
+@NoArgsConstructor
 @Document(value = "myTable")
 public class MyTableModel {
     @Id
     @Indexed
+    @Setter(AccessLevel.PRIVATE)
     private Long id;
 
     private String name;

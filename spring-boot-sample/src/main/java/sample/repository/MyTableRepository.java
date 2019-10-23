@@ -3,13 +3,15 @@ package sample.repository;
 import org.springframework.data.repository.reactive.ReactiveSortingRepository;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import sample.repository.models.MyTableModel;
 
-import java.util.Date;
 
 
-@Repository("MyTableRepository")
+@Repository
 public interface MyTableRepository extends ReactiveSortingRepository<MyTableModel, Long> {
+
+    Mono<MyTableModel> findByName(final Long name);
 
     /**
      *
@@ -17,7 +19,7 @@ public interface MyTableRepository extends ReactiveSortingRepository<MyTableMode
      * @param dateMax
      * @return
      */
-    Flux<MyTableModel> findAllCreationDateBetween(Date dateMin, Date dateMax);
+    //Flux<MyTableModel> findAllCreationDateBetween(Date dateMin, Date dateMax);
 
 
 
