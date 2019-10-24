@@ -49,7 +49,7 @@ For the moment, only this REST API is available
 
 This will return the following collection json formatted
 
-`````
+```
 [{
     "code": "2",
     "name": "OP01",
@@ -104,4 +104,5 @@ This will return the following collection json formatted
     "email": "test1@op05.fr",
     "creationDate": "2019-10-23 17:37:12",
     "address": "VILLENEUVE D'ASCQ"
-}]```
+}]
+```
