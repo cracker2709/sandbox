@@ -35,7 +35,7 @@ public class SampleApplication implements CommandLineRunner {
 		this.myTableRepository.save(MyTableModel.builder().code("8").name("OP04").email("test1@op04.be").creationDate("2019-04-19 02:59:59").address("TOURNAI").build()).log().subscribe(item -> log.info("Inserting {}", item.toString()));
 		this.myTableRepository.save(MyTableModel.builder().code("9").name("OP05").email("test1@op05.fr").creationDate("2019-10-23 17:37:12").address("VILLENEUVE D'ASCQ").build()).log().subscribe(item -> log.info("Inserting {}", item.toString()));
 
-		Thread.sleep(100);
+		Thread.sleep(500);
 	}
 
 }
