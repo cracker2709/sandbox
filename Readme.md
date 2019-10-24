@@ -23,20 +23,31 @@ Since util directory
 - Use of Reactive API
 - Launch mongo docker file to execute springboot App
 
+Requirements
+    * Java SDK 11
+    * Maven 3
+    * Docker 18.09+
+
+First of all build project with maven 
+
+`$ mvn clean install`
+
+Then launch docker mongoDB container in order to have a server instance which contains the NOSQL data
 
 `$ cd docker`
 
 `$ docker-compose -f ./mongo-compose.yml up`
 
-This will launch a simple mongoDB container listening on localhost port 27017 with a sample collection named "myDb"
+This will launch the container listening on localhost port 27017 with a sample collection named "myDb"
+
 To connect on it simply launch
 
 `$ mongo --host localhost --port 27017 myDb`
 
-Or use NoSQLBooster4Mongo which is an excellent means to interact with mongo servers
+Or use NoSQLBooster4Mongo which is an excellent means to interact with mongo servers (no username / password required)
 
 Once container is up
-launch the app via-sample
+launch the app via spring-boot-sample module
 
 `$ cd spring-boot-sample`
 
