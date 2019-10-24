@@ -6,9 +6,9 @@
 This module contains samples of helpers for regex, date and json testing.
 
 It also contains a part of SSL utilities such as instanciation of a SSL context for mutual authentification according to client keystores and truststores.
-A class is also implented to extract X509 informations with its junit tests.
+A class is also implemented to extract X509 informations with its junit tests.
 
-Sample class to manipulate Genetics T, S, K, V
+Sample class to manipulate Generics T, S, K, V
 
 To generate XML from XSD
 Since util directory
@@ -49,7 +49,8 @@ For the moment, only this REST API is available
 
 This will return the following collection json formatted
 
-```[{
+`````
+[{
     "code": "2",
     "name": "OP01",
     "email": "test1@op02.fr",
