@@ -1,13 +1,14 @@
 package sample.repository;
 
 import date.DateFormatUtils;
-import org.junit.Assert;
+import lombok.extern.log4j.Log4j2;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
@@ -22,8 +23,9 @@ import java.util.Locale;
 
 
 @TestPropertySource("classpath:config/application-test.yml")
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
+@Log4j2
 public class MyTableRepositoryTest {
 
 
@@ -59,6 +61,7 @@ public class MyTableRepositoryTest {
         StepVerifier.create(myTableModelFlux)
                 .expectSubscription()
                 .expectNextCount(NBDOC)
+                .consumeNextWith(p -> log.info(p.toString()))
                 .verifyComplete();
 
     }
@@ -85,7 +88,7 @@ public class MyTableRepositoryTest {
         // THEN
         StepVerifier.create(myTableModelMono)
                 .expectSubscription()
-                .consumeNextWith(p -> verifyAsserts(p, CODE_8, OP04, dateString, TOURNAI))
+                .consumeNextWith(p -> verifyAssertionss(p, CODE_8, OP04, dateString, TOURNAI))
                 .verifyComplete();
 
     }
@@ -126,7 +129,7 @@ public class MyTableRepositoryTest {
             // THEN
             StepVerifier.create(myTableEntityMono)
                     .expectSubscription()
-                    .consumeNextWith(p -> verifyAsserts(p, CODE_9, OP05, creationDate, CAMBRAI))
+                    .consumeNextWith(p -> verifyAssertionss(p, CODE_9, OP05, creationDate, CAMBRAI))
                     .verifyComplete();
 
     }
@@ -140,12 +143,12 @@ public class MyTableRepositoryTest {
      * @param creationDate
      * @param address
      */
-    private void verifyAsserts(MyTableModel myTableModel, String id, String name, String creationDate, String address) {
-        Assert.assertNotNull(myTableModel);
-        Assert.assertEquals(id, myTableModel.getCode());
-        Assert.assertEquals(name, myTableModel.getName());
-        Assert.assertEquals(creationDate, myTableModel.getCreationDate());
-        Assert.assertEquals(address, myTableModel.getAddress());
+    private void verifyAssertionss(MyTableModel myTableModel, String id, String name, String creationDate, String address) {
+        Assertions.assertNotNull(myTableModel);
+        Assertions.assertEquals(id, myTableModel.getCode());
+        Assertions.assertEquals(name, myTableModel.getName());
+        Assertions.assertEquals(creationDate, myTableModel.getCreationDate());
+        Assertions.assertEquals(address, myTableModel.getAddress());
     }
 
 }

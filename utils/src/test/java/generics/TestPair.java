@@ -1,7 +1,8 @@
 package generics;
 
-import org.junit.Assert;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class TestPair {
     @Test
@@ -11,9 +12,9 @@ public class TestPair {
         Pair<String, Integer> pairStringInt = new Pair("plop", 1);
         pairStringInt.toString();
 
-        Assert.assertEquals(0, pairIntStr.getKey().intValue());
-        Assert.assertEquals("foobar", pairIntStr.getValue());
-        Assert.assertEquals("plop", pairStringInt.getKey());
-        Assert.assertEquals(1, pairStringInt.getValue().intValue());
+        Assertions.assertEquals(0, pairIntStr.getKey().intValue());
+        Assertions.assertEquals("foobar", pairIntStr.getValue());
+        Assertions.assertEquals("plop", pairStringInt.getKey());
+        Assertions.assertEquals(1, pairStringInt.getValue().intValue());
     }
 }

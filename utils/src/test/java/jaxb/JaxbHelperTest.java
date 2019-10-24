@@ -1,13 +1,13 @@
 package jaxb;
 
 import com.google.common.io.ByteSource;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 public class JaxbHelperTest {
 
     public static final String XML_FILE = "test.xml";
@@ -17,10 +17,10 @@ public class JaxbHelperTest {
         try {
             byte[] lbContent = FileToString.fileToBytes(XML_FILE);
             GlobalList globalList = JaxbHelper.unmarshall(GlobalList.class, ByteSource.wrap(lbContent).openStream());
-            Assert.assertNotNull(globalList);
+            Assertions.assertNotNull(globalList);
 
         }catch(Exception e) {
-            Assert.fail(e.getMessage());
+            Assertions.fail(e.getMessage());
         }
     }
 }

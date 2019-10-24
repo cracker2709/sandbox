@@ -1,8 +1,7 @@
 package generics;
 
-
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class TestSolo {
     @Test
@@ -10,8 +9,8 @@ public class TestSolo {
         Solo<Integer> soloInt = new Solo(0);
         Solo<String> soloString = new Solo("foobar");
 
-        Assert.assertEquals(0, soloInt.getValue().intValue());
-        Assert.assertEquals("foobar", soloString.getValue());
+        Assertions.assertEquals(0, soloInt.getValue().intValue());
+        Assertions.assertEquals("foobar", soloString.getValue());
 
     }
 }
