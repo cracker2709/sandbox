@@ -24,9 +24,9 @@ Since util directory
 - Launch mongo docker file to execute springboot App
 
 Requirements
-    * Java SDK 11
-    * Maven 3
-    * Docker 18.09+
+ - Java SDK 11
+ - Maven 3
+ - Docker 18.09+
 
 First of all build project with maven 
 
