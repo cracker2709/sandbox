@@ -1,6 +1,5 @@
 package sample.repository;
 
-
 import date.DateFormatUtils;
 import org.junit.Assert;
 import org.junit.Test;
@@ -21,10 +20,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-@SpringBootTest
-@RunWith(SpringJUnit4ClassRunner.class)
+
 @TestPropertySource("classpath:config/application-test.yml")
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest
 public class MyTableRepositoryTest {
+
 
     @Autowired
     private MyTableRepository myTableRepository;
@@ -39,8 +40,11 @@ public class MyTableRepositoryTest {
     private static final String CODE_6 = "6";
     private static final String CODE_7 = "7";
     private static final String CODE_8 = "8";
+    private static final String CODE_9 = "9";
     private static final String OP04 = "OP04";
+    private static final String OP05 = "OP05";
     private static final String TOURNAI = "TOURNAI";
+    private static final String CAMBRAI = "CAMBRAI";
 
 
     @Test
@@ -90,8 +94,8 @@ public class MyTableRepositoryTest {
     //@Test
     public void test_actions_between() {
         // GIVEN
-        Date dateMin = Date.from(LocalDateTime.parse("2017-07-28 02:59:59" , DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss", Locale.FRANCE)).toInstant(ZoneOffset.UTC));
-        Date dateMax = Date.from(LocalDateTime.parse("2018-07-28 02:59:59" , DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss",Locale.FRANCE)).toInstant(ZoneOffset.UTC));
+        Date dateMin = Date.from(LocalDateTime.parse("2017-07-28 02:59:59", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss", Locale.FRANCE)).toInstant(ZoneOffset.UTC));
+        Date dateMax = Date.from(LocalDateTime.parse("2018-07-28 02:59:59", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss", Locale.FRANCE)).toInstant(ZoneOffset.UTC));
 
         // WHEN
         //final Flux<MyTableModel> myTableModelFlux = myTableRepository.findAllCreationDateBetween(dateMin, dateMax);
@@ -101,30 +105,35 @@ public class MyTableRepositoryTest {
         //        .create(myTableModelFlux).expectNextCount(8);
 
 
-
     }
 
-    //@Test
+    @Test
     public void test_save_action() {
         // GIVEN
-        /*MyTableModel myTableModel = MyTableModel
+        String creationDate = DateFormatUtils.formatSqlDateToString(new Date());
+        MyTableModel myTableModel = MyTableModel
                 .builder()
-                .name("test")
-                .address("address")
-                .email("email")
-                .creationDate(new Date())
+                .code(CODE_9)
+                .name(OP05)
+                .address(CAMBRAI)
+                .email("email@email.fr")
+                .creationDate(creationDate)
                 .build();
 
-        // WHEN
-        Mono<MyTableModel> myTableEntityMono = myTableRepository.save(myTableModel);
+            // WHEN
+            Mono<MyTableModel> myTableEntityMono = myTableRepository.save(myTableModel);
 
-        // THEN
-        StepVerifier.create(myTableEntityMono).expectNextMatches(name -> name.equals("test"));*/
+            // THEN
+            StepVerifier.create(myTableEntityMono)
+                    .expectSubscription()
+                    .consumeNextWith(p -> verifyAsserts(p, CODE_9, OP05, creationDate, CAMBRAI))
+                    .verifyComplete();
 
     }
 
     /**
      * Controle generique des assertions
+     *
      * @param myTableModel
      * @param id
      * @param name

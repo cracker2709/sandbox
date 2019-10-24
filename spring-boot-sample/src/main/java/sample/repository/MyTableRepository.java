@@ -14,13 +14,7 @@ public interface MyTableRepository extends ReactiveSortingRepository<MyTableMode
 
     Mono<MyTableModel> findByName(final String name);
 
-    /**
-     *
-     * @param dateMin
-     * @param dateMax
-     * @return
-     */
-    //Flux<MyTableModel> findAllCreationDateBetween(Date dateMin, Date dateMax);
+
 
 
 
