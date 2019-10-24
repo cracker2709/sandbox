@@ -38,7 +38,7 @@ Or use NoSQLBooster4Mongo which is an excellent means to interact with mongo ser
 Once container is up
 launch the app via-sample
 
-`$ cd spring-boot`
+`$ cd spring-boot-sample`
 
 `$ mvn spring-boot:run`
 
