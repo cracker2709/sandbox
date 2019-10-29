@@ -3,12 +3,15 @@ package sample;
 import com.github.javafaker.Faker;
 import date.DateFormatUtils;
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.ExitCodeEvent;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
+import org.springframework.context.event.EventListener;
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 import org.springframework.web.reactive.config.EnableWebFlux;
 import sample.repository.MyTableRepository;
@@ -42,15 +45,23 @@ public class SampleApplication {
 
 
 			Faker faker = new Faker();
-			String name, firstName, email;
+			String name, firstName;
+			StringBuilder emailBuilder;
 			for(int i =0 ; i < 100 ; i++) {
 				name = faker.name().name();
 				firstName= faker.name().firstName();
-				email = firstName.trim().toLowerCase() + "." + name.trim().toLowerCase() + "@" + faker.company().name().trim().toLowerCase() + "." + faker.internet().domainName().trim().toLowerCase();
+				emailBuilder  = new StringBuilder(
+						firstName.trim().replaceAll(StringUtils.SPACE, StringUtils.EMPTY).toLowerCase())
+						.append(".")
+						.append(name.trim().replaceAll(StringUtils.SPACE, StringUtils.EMPTY).toLowerCase())
+						.append("@")
+						.append(faker.company().name().trim().replaceAll(StringUtils.SPACE, "-").toLowerCase())
+						.append(".")
+						.append(faker.internet().domainName().trim().replaceAll(StringUtils.SPACE, "-").toLowerCase());
 				this.myTableRepository.save(MyTableModel.builder().
 						code(faker.code().ean8()).
 						name(name + " " + firstName)
-						.email(email)
+						.email(emailBuilder.toString())
 						.creationDate(DateFormatUtils.formatSqlDateToString(faker.date().birthday()))
 						.address(faker.address().city()).build()).log().subscribe(item -> log.info("Inserting {}", item.toString()));
 			}
