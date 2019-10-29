@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.EventListener;
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 import org.springframework.web.reactive.config.EnableWebFlux;
+import reactor.core.publisher.Mono;
 import sample.repository.MyTableRepository;
 import sample.repository.models.MyTableModel;
 
@@ -40,14 +41,14 @@ public class SampleApplication {
 	@Bean
 	@Profile("!test")
 	public CommandLineRunner generateCatalogData() {
-
+		Mono<Void> mono = myTableRepository.deleteAll();
 		return strings -> {
 
-
+			this.myTableRepository.deleteAll();
 			Faker faker = new Faker();
 			String name, firstName;
 			StringBuilder emailBuilder;
-			for(int i =0 ; i < 100 ; i++) {
+			for(int i =0 ; i < 1000 ; i++) {
 				name = faker.name().name();
 				firstName= faker.name().firstName();
 				emailBuilder  = new StringBuilder(

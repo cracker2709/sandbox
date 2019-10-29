@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import sample.repository.models.MyTableModel;
 import sample.services.MyTableService;
 
@@ -28,6 +29,15 @@ public class TableController {
         Flux<MyTableModel> results = this.myTableService.findAll();
         results.subscribe(p -> inspectObj(p));
         return results;
+    }
+
+
+    @GetMapping(value = "/deleteAll")
+    @ResponseStatus(HttpStatus.OK)
+    public Mono<MyTableService> deleteAllModels() {
+        log.info("Deleting all models");
+        Mono<Void> results = this.myTableService.deleteAll();
+        return null;
     }
 
     private void inspectObj(MyTableModel myTableModel) {
