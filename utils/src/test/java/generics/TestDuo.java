@@ -4,7 +4,7 @@ package generics;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class TestDuo {
+public class    TestDuo {
     @Test
     public void testDuo() {
         Duo<Integer, String> duoIntStr = new Duo(0, "foobar");
