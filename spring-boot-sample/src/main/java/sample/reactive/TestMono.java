@@ -22,8 +22,8 @@ public class TestMono {
 
     // TODO Return a Mono that contains a "foo" value
     public Mono<String> fooMono() {
-        Mono<String> monoStr = Mono.just("foo");
-        monoStr.subscribe(p -> log.info(p));
+        Mono<String> monoStr = Mono.just("foo").log();
+        monoStr.subscribe(p -> log.info("Mono contains {} ",p));
         return monoStr;
     }
 
@@ -34,8 +34,13 @@ public class TestMono {
         return Mono.error(new IllegalStateException("bar"));
     }
 
-
-
+    public static void main(String[] args) {
+        TestMono singleton = new TestMono();
+        singleton.emptyMono();
+        singleton.monoWithNoSignal();
+        singleton.fooMono();
+        singleton.errorMono();
+    }
 
 
 }
