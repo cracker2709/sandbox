@@ -4,14 +4,14 @@ import com.google.common.net.HttpHeaders;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import sample.repository.models.MyTableModel;
 
-import java.util.List;
+import javax.validation.constraints.Null;
+import java.net.ConnectException;
 
 @Log4j2
 public class SampleClient {
@@ -27,24 +27,33 @@ public class SampleClient {
 
         log.info("Process");
 
-        Flux<String> myTableModelFlux = webClient
+        Flux<MyTableModel> myTableModelFlux = webClient
                     .get()
                     .uri("/table/all")
                     .retrieve()
-                    .bodyToFlux(String.class)
-                    .onErrorResume(e -> Flux.empty())
-                    .doOnError(ex -> log.error("Exception on table calling {} ", ex)).log();
+                    .onStatus(HttpStatus::is4xxClientError, clientResponse -> Mono.error(new IllegalStateException("400 Error")))
+                    .onStatus(HttpStatus::is5xxServerError, clientResponse -> Mono.error(new IllegalStateException("500 Error")))
+                    .bodyToFlux(MyTableModel.class);
 
 
-        myTableModelFlux.subscribe(p -> log.info(p));
+        myTableModelFlux.subscribe(p -> sampleClient.inspectObj(p));
 
 
+        // Mandatory to see results !! Otherwise, the main thread ends too early
+        try {
+            long tempo = 200L;
+            log.warn("Wait {} ms in order to see results before main Thread ends !", tempo);
+            Thread.sleep(tempo);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         log.info("End");
 
     }
 
     private ExchangeFilterFunction logRequest() {
+        log.info("sending request....");
         return (clientRequest, next) -> {
             log.info("Request: {} {}", clientRequest.method(), clientRequest.url());
             clientRequest.headers()
@@ -55,6 +64,7 @@ public class SampleClient {
     }
 
     private ExchangeFilterFunction logResponseStatus() {
+        log.info("retrieving response....");
         return ExchangeFilterFunction.ofResponseProcessor(clientResponse -> {
             log.info("Response Status {}", clientResponse.statusCode());
             return Mono.just(clientResponse);
