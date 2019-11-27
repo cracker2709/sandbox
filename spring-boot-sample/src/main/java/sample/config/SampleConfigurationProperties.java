@@ -9,7 +9,7 @@ import org.springframework.context.annotation.PropertySource;
 @Configuration
 @EnableAutoConfiguration(exclude = { DataSourceAutoConfiguration.class })
 @PropertySource("classpath:config/application.yml")
-@ComponentScan(basePackages = { "sample.services","sample.web"})
+@ComponentScan(basePackages = { "sample.services","sample.web", "sample.config"})
 @EntityScan("sample.domain")
 public class SampleConfigurationProperties {
 
