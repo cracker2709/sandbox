@@ -4,7 +4,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -36,6 +38,22 @@ public class FlatMapExampleTest {
         List<String> res = FlatMapExample.getListOfAllChars(dataArray);
 
         //THEN
+        Assertions.assertEquals(expected, res);
+    }
+
+    @Test
+    public void testLoop() {
+        List<String> strings = Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h");
+        List<String> expected = Arrays.asList("b", "d", "e");
+        List<String> res  = new LinkedList<>();
+
+        strings.stream()
+                .filter(s -> s.matches("b|d|e"))
+                .forEach(
+                value -> {
+                    res.add(value);
+                }
+        );
         Assertions.assertEquals(expected, res);
     }
 }
